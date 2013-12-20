@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	div.container-fluid
+		form.form-horizontal(method='post')
+			fieldset
+				legend User Login
+				- if (message)
+					div(class='alert alert-error') #{message}
+				div.control-group
+					label.control-label(for='username') Account
+					div.controls
+						input#username.input-xlarge(type='text' name='username')
+				
+				div.control-group
+					label.control-label(for='password') Password
+					div.controls
+						input#password.input-xlarge(type='password' name='password')
+				
+				div.form-actions
+					button(class='btn btn-primary' type='submit') Login
