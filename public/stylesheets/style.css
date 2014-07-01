@@ -1,0 +1,10 @@
+a {
+  color: #00B7FF;
+}
+td{
+	text-align:left;
+	font-size: 23px;
+}
+.myCarousel{
+	interval:false;
+}

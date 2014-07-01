@@ -1,0 +1,151 @@
+﻿doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/carousel.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		- var html = "<script>window.addEventListener('load', function () {$('.myCarousel').carousel({interval: false})})</script>"
+		| !{html}
+	body
+		block content
+		script(src='/javascripts/jquery.min.js')
+		script(src='/javascripts/bootstrap.min.js')
+		
+		div(id='myCarousel' class='carousel slide' data-ride='carousel')
+			ol(class="carousel-indicators")
+				li(data-target="#myCarousel" data-slide-to="0" class="active")
+				li(data-target="#myCarousel" data-slide-to="1")
+				li(data-target="#myCarousel" data-slide-to="2")
+				li(data-target="#myCarousel" data-slide-to="3")
+				li(data-target="#myCarousel" data-slide-to="4")
+				li(data-target="#myCarousel" data-slide-to="5")
+				li(data-target="#myCarousel" data-slide-to="6")
+				li(data-target="#myCarousel" data-slide-to="7")
+				li(data-target="#myCarousel" data-slide-to="8")				
+			div(class="carousel-inner")
+				div(class="item active")
+					.container
+						
+						div(class="carousel-caption")
+							h1.
+								What problem we need to resolve?	
+							img(src="images/24x7.png")								
+							table(height="300")
+								tr
+									td(aligh="left")							
+										p.								
+											24x7 global support team to need quick response for urgent cases from different time zone.
+										p.
+										P.
+											An efficient notification system would help us reduce urgent cases and improve customer satisfication.
+							p.
+								- 1 -
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							What did we do before?
+						h2.						
+							Email + China Telecom email SMS service
+						img(src="/images/6.png")
+						b.    +   
+						img(src="/images/7.png")
+						p.
+						button.btn.btn-warning.btn-lg Not stable, time delay.
+						p.
+						button.btn.btn-warning.btn-lg Mess Sev1 notification and other SMS.
+						table(height="200")
+						p.
+								- 2 -
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							What we will do?
+						table(height="300")
+							tr
+								td(aligh="left")							
+									p.
+										Build up a message pushing service
+									li. Take advantage of variance runtime and add-ons provided by Bluemix
+									li. Provide client app and desktop browser plug-in
+									p.
+									P.
+										Next stage, provide early-warning feature for existing applications, notify support team before Severity 1 happens.
+						h2.
+							Mobile + Desktop + API
+						table(height="100")
+						p.
+								- 3 -
+							
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Architecture
+						img(src="/images/architecture.png")
+						p.
+								- 4 -
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Why Node.JS?
+						img(src="/images/block.png" width="900px")
+						p.
+								- 5 -	
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Why Node.JS?
+						img(src="/images/node_db.png" width="900px")
+						p.
+								- 6 -	
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Who are using Node.JS?
+						p.
+						button.btn.btn-primary.btn-lg eBay
+						button.btn.btn-warning.btn-lg Walmart
+						button.btn.btn-info.btn-lg Baidu
+						button.btn.btn-danger.btn-lg Taobao
+						p.
+						h1.
+							and us
+						table(height="220")
+						p.
+								- 7 -									
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Benifits
+						table(height="400")
+							tr
+								td(aligh="left")
+									p
+										li Ensure SLA complicance for 24X7 support
+									p										
+										li Early-warning feature to inprove delivery quality
+									p
+										li Reduce 20%+ Sev 1 cases after implement early-warning feature
+									p
+										li Next stage to provide common API for usage by other team (e.g. log early-warning, internal news broadcasting..)
+						p.
+								- 8 -
+				div(class="item")
+					div(class="carousel-caption")
+						h1.
+							Thank You
+						p.
+						p.
+						button.btn.btn-primary.btn-lg Blue Push
+						b.     by     
+						button.btn.btn-default.btn-lg NWAS-ISC team
+						p.
+						p.
+							http://bp.stage1.mybluemix.net
+						table(height="220")
+						p.
+								- 9 -										
+			a(class="left carousel-control" href="#myCarousel" data-slide="prev")
+				span(class="glyphicon glyphicon-chevron-left")
+			a(class="right carousel-control" href="#myCarousel" data-slide="next")
+				span(class="glyphicon glyphicon-chevron-right")
