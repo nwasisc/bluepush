@@ -28,10 +28,23 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/ppt', routes.ppt);
-
-http.createServer(app).listen(app.get('port'), function(){
+// create server
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+// require socket.io module
+var io = require('socket.io').listen(server);
+
+// routes
+app.get('/', routes.index);
+
+io.sockets.on('connection', function(socket){
+	socket.on('message', function(data){
+		//io.sockets.emit('push-message', data);
+		socket.broadcast.emit('push-message', data);
+		console.log('Message is ' + data);
+	});
+});
+
+
