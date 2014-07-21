@@ -1,8 +1,9 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-/*
- * GET users listing.
- */
-
-exports.list = function(req, res){
-  res.send("respond with a resource");
-};
+var userSchema = new Schema({
+	account: String,
+	fname: String,
+	mname: String,
+	lname: String,
+});

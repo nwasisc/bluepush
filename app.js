@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
 
 var app = express();
 
@@ -26,25 +27,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
-}
+};
 
 // create server
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-// require socket.io module
-var io = require('socket.io').listen(server);
-
-// routes
+//routes
 app.get('/', routes.index);
 
-io.sockets.on('connection', function(socket){
+// require socket.io module
+var io = require('socket.io')(server);
+//io.sockets.on('connection', function(socket){
+io.on('connection',function(socket){
 	socket.on('message', function(data){
-		//io.sockets.emit('push-message', data);
 		socket.broadcast.emit('push-message', data);
 		console.log('Message is ' + data);
 	});
+	
+	socket.on('disconnect', function(){ });
 });
 
 
