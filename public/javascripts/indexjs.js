@@ -14,6 +14,7 @@
 	});
 	// receive push-message from server;
 	socket.on('push-message', function(data){
-		alert (data);
+		//alert (data);
+		sendMsgForm.append(data);
 	});
  });

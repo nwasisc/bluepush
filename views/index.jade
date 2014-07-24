@@ -5,9 +5,17 @@ block content
 	p Welcome to #{title}
 	
 	form#send-message
-		textarea#message
-		input(type='submit', value='Send')
-		input(type='reset', value='Reset')
+		textarea#subject
+		p
+			textarea#message
+		p
+			select#groups
+				- each group in groups
+					option(value=group)= group
+					
+		p
+			input(type='submit', value='Send')
+			input(type='reset', value='Reset')
 		
 	script(src='/javascripts/indexjs.js')
 		

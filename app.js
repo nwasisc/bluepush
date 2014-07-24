@@ -34,8 +34,18 @@ var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+//connect mongodb
+mongoose.connect('mongodb://localhost/BP_DB');
+
+var Schema = mongoose.Schema;
+var acctSchema = new Schema ({
+	group: String,
+	account: String});
+	
+var Account = mongoose.model('Account', acctSchema);
+//Account.create({group: 'Group2', account: 'ACCT3'});
 //routes
-app.get('/', routes.index);
+app.get('/', routes.index(Account));
 
 // require socket.io module
 var io = require('socket.io')(server);
