@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	h1= 'Welcome ' + user.username + ' !!'
+	a.btn(href='/demo/logout') Logout
+	
+	div.container-fluid
+		form#send-message.form-horizontal
+			fieldset
+				legend Send Message
+
+				div.control-group
+					label.control-label(for='subject') Subject
+					div.controls
+						textarea#subject.input-xlarge(name='subject')
+						
+				div.control-group
+					label.control-label(for='message') Message
+					div.controls
+						textarea#message.input-xlarge(name='message')
+						
+				div.control-group
+					label.control-label(for='sendto') To
+					div.controls
+						input#sendto(name='sendto')
+								
+				div.form-actions
+					button(class='btn btn-primary' type='submit') Send
+					button(class='btn btn-primary' type='reset') Reset
+	
+	script(src='/javascripts/demo/home.js')

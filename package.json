@@ -9,7 +9,7 @@
     "express": "3.8.0",
     "jade": "*",
 	"mongoose": "*",
-	"socket.io": "1.0",
-	"session-mongoose": "*"
+	"socket.io": "0.9",
+	"connect-mongo": "*"
   }
 }
