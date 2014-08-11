@@ -1,8 +1,11 @@
-extends layout
+extends demolayout
 
 block content
 	div.container-fluid
+	div.container theme-showcase
+	div.jumbotron
 		form.form-horizontal(method='post')
+			<div style="text-align:center">
 			fieldset
 				legend User Login
 				- if (message)
@@ -19,3 +22,4 @@ block content
 				
 				div.form-actions
 					button(class='btn btn-primary' type='submit') Login
+	</div>

@@ -1,7 +1,15 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
+    
+	div.container theme-showcase
+	div.jumbotron
+		<h1 class="text-center">Hello, Bluepush</h1>
+		<p class="text-center">Hi.This is a platform about Bluepush!</p>
+		<p class="text-center">For more information,please login in!</p>
+		<p class="text-center"><a class="btn btn-primary btn-lg" href='/demo/login'>Login In</a></p>
+	script(src='/javascripts/indexjs.js')
+	</div>
 	
-		
+	
+	

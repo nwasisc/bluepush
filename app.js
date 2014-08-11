@@ -89,6 +89,9 @@ app.get('/user/logout', authentication);
 app.get('/user/logout', routes.logout);
 app.get('/home', authentication);
 app.get('/home', routes.home);
+app.get('/aboutUs',function(req,res){
+  res.render('aboutUs',{ title: 'About Us' });
+});
 
 
 //--------------------------------------------------DEMO----------------------------------------------------------//
