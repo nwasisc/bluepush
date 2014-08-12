@@ -8,28 +8,28 @@ block content
 	h1= 'Welcome ' + user.username + ' !!'
 	a.btn(href='/demo/logout') Logout
 	
-		form#send-message.form-horizontal
-			<div style="text-align:center">
-			fieldset
-				legend Send Message
+	form#send-message.form-horizontal
+		<div style="text-align:center">
+		fieldset
+			legend Send Message
 
-				div.control-group
-					label.control-label(for='subject') Subject
-					div.controls
-						textarea#subject.input-xlarge(name='subject')
-						
-				div.control-group
-					label.control-label(for='message') Message
-					div.controls
-						textarea#message.input-xlarge(name='message')
-						
-				div.control-group
-					label.control-label(for='sendto') To
-					div.controls
-						input#sendto(name='sendto')
-								
-				div.form-actions
-					button(class='btn btn-primary' type='submit') Send
-					button(class='btn btn-primary' type='reset') Reset
+			div.control-group
+				label.control-label(for='subject') Subject
+				div.controls
+					textarea#subject.input-xlarge(name='subject')
+					
+			div.control-group
+				label.control-label(for='message') Message
+				div.controls
+					textarea#message.input-xlarge(name='message')
+					
+			div.control-group
+				label.control-label(for='sendto') To
+				div.controls
+					input#sendto(name='sendto')
+							
+			div.form-actions
+				button(class='btn btn-primary' type='submit') Send
+				button(class='btn btn-primary' type='reset') Reset
 	</div>
 	script(src='/javascripts/demo/home.js')
