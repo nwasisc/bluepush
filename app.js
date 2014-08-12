@@ -18,10 +18,6 @@ var	MongoStore = require('connect-mongo')(express);
 //	});
 //var sessionStore = new express.session.MemoryStore({reapInterval: 60000 * 10});
 
-var sessionStore = new MongoStore({
-	db: 'session',
-	host: '127.0.0.1',
-})
 
 
 var app = express();
@@ -36,12 +32,24 @@ app.use(express.bodyParser());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('fens.me'));
+
 //app.use(express.cookieSession({secret: 'fens.me'}));
-app.use(express.session({
+var sessionStore = new MongoStore({
+	db: 'ppd',
+	//host: '127.0.0.1',
+	host:'ds033069.mongolab.com',
+	port:'33069',
+	username:'ppd',
+	password:'111111',
+},function(e){
+	app.use(express.cookieParser('fens.me'));
+	app.use(express.session({
 	store: sessionStore,
 	secret: 'fens.me'
-}));
+	}));
+
+
+
 app.use(function(req, res, next){
 	res.locals.user = req.session.user;
 	var err = req.session.error,
@@ -107,16 +115,19 @@ function demo_notAuthentication(req, res, next) {
 	}
 	next();
 }
+
 //-------------------------------------------------DEMO END-------------------------------------------------------//
 
 // require socket.io module
 var io = sio.listen(server);
 var usersWS = {};
-/*
 io.set('authorization', function(handshakeData, callback){
+	console.log(handshakeData);
 	//handshakeData.cookie = parseCookie(handshakeData.headers.cookie);
 	handshakeData.cookie = connect.utils.parseSignedCookies(cookie.parse(decodeURIComponent(handshakeData.headers.cookie)),'fens.me');
+	console.log(handshakeData.cookie);
 	var sessionid = handshakeData.cookie['connect.sid'];
+	console.log(sessionid);
 	if (sessionid) {
 		//var sid = '';
 		//sid = sessionid.split(':')[1].split('.')[0];
@@ -134,46 +145,28 @@ io.set('authorization', function(handshakeData, callback){
 		callback('nosession');
 	};
 });
-*/
+
 //io.sockets.on('connection', function(socket){
 io.sockets.on('connection',function(socket){
 	var session = socket.handshake.session;
-	//var user = session.user.username;
-	//usersWS[user] = socket;
+	var user = session.user.username;
+	console.log(user);
+	usersWS[user] = socket;
 	
 	socket.on('message', function(data){
-	if(data.subject=='login'){
-		var user=login.user;
-		var pw=login.pw;
-		usersWS[user] =user+pw;
-	}
-	else{
-		if(usersWS[user] !=''){
-			var obj = {
-				subject: data.subject,
-				message: data.message,
-				sendto: data.sendto
-			};
-			var target = usersWS[obj.sendto];
-			}
-			else{
-				var obj = {
-				subject: data.subject,
-				message: data.message,
-				sendto: data.sendto
-			};
-			var target = usersWS[user];
-			}
-
-			console.log(obj.sendto);
-			if (target) {
-				console.log(target);
-				target.emit('push-message', data);
-			}
-			//msgModel.create(obj);
-			//socket.broadcast.emit('push-message', data);
-			}
-
+		var obj = {
+			subject: data.subject,
+			message: data.message,
+			sendto: data.sendto
+		};
+		var target = usersWS[obj.sendto];
+		console.log(obj.sendto);
+		if (target) {
+			console.log(target);
+			target.emit('push-message', data);
+		}
+		//msgModel.create(obj);
+		//socket.broadcast.emit('push-message', data);
 	});
 	
 	socket.on('disconnect', function(){ 
@@ -182,7 +175,7 @@ io.sockets.on('connection',function(socket){
 		console.log(user + ' has been logged off.');
 	});
 });
-
+});
 function authentication(req, res, next) {
 	if (!req.session.user) {
 		req.session.error='Please log in first.';
