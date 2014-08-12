@@ -4,7 +4,7 @@
  */
 var mongoose = require('mongoose');
 //connect mongodb
-mongoose.connect('mongodb://ppd:111111@ds033069.mongolab.com:33069/ppd');
+mongoose.connect('mongodb://localhost/BP_DB');
 
 var Schema = mongoose.Schema;
 
