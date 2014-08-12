@@ -81,9 +81,6 @@ app.get('/user/logout', authentication);
 app.get('/user/logout', routes.logout);
 app.get('/home', authentication);
 app.get('/home', routes.home);
-app.get('/aboutUs',function(req,res){
-  res.render('aboutUs',{ title: 'About Us' });
-});
 
 
 //--------------------------------------------------DEMO----------------------------------------------------------//
@@ -116,6 +113,7 @@ function demo_notAuthentication(req, res, next) {
 // require socket.io module
 var io = sio.listen(server);
 var usersWS = {};
+/*
 io.set('authorization', function(handshakeData, callback){
 	//handshakeData.cookie = parseCookie(handshakeData.headers.cookie);
 	handshakeData.cookie = connect.utils.parseSignedCookies(cookie.parse(decodeURIComponent(handshakeData.headers.cookie)),'fens.me');
@@ -137,27 +135,47 @@ io.set('authorization', function(handshakeData, callback){
 		callback('nosession');
 	};
 });
-
+*/
 //io.sockets.on('connection', function(socket){
 io.sockets.on('connection',function(socket){
 	var session = socket.handshake.session;
-	var user = session.user.username;
-	usersWS[user] = socket;
+	//var user = session.user.username;
+	//usersWS[user] = socket;
 	
 	socket.on('message', function(data){
-		var obj = {
-			subject: data.subject,
-			message: data.message,
-			sendto: data.sendto
-		};
-		var target = usersWS[obj.sendto];
-		console.log(obj.sendto);
-		if (target) {
-			console.log(target);
-			target.emit('push-message', data);
+	if(data.subject=='login'){
+		var user=login.user;
+		var pw=login.pw;
+		usersWS[user] =user+pw;
+	}
+	else{
+		if(usersWS[user] !=''){
+			var obj = {
+				subject: data.subject,
+				message: data.message,
+				sendto: data.sendto
+			};
+			var target = usersWS[obj.sendto];
+			}
+			else{
+				var obj = {
+				subject: data.subject,
+				message: data.message,
+				sendto: data.sendto
+			};
+			var target = usersWS[user];
+			}
+
+			console.log(obj.sendto);
+			if (target) {
+				console.log(target);
+				target.emit('push-message', data);
+			}
+			//msgModel.create(obj);
+			//socket.broadcast.emit('push-message', data);
+			}
+
 		}
-		//msgModel.create(obj);
-		//socket.broadcast.emit('push-message', data);
 	});
 	
 	socket.on('disconnect', function(){ 
@@ -181,3 +199,4 @@ function notAuthentication(req, res, next) {
 	}
 	next();
 }
+
