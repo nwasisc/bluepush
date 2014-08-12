@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -174,6 +175,7 @@ io.sockets.on('connection',function(socket){
 			//socket.broadcast.emit('push-message', data);
 			}
 
+		}
 	});
 	
 	socket.on('disconnect', function(){ 
